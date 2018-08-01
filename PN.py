@@ -18,7 +18,24 @@ PN = [] # Storing generated Pseudo Noise sequence
 for i in range(size):
     print(A[-1])
     PN.append(A[-1])
-    A = [A[-1] ^ A[-2], A[0], A[1], A[2], A[3]] # ^ XOR """
+    A = [A[-1] ^ A[-2], A[0], A[1], A[2], A[3]] # ^ XOR 
+
+### Making Function#########
+def PN_sequence(LFSR):
+    A = [] # list to store initial value of LFSR
+    for i in range(LFSR):
+         A.append(1)
+    size = 2**LFSR - 1  #2^D - 1
+    PN = [] # Storing generated Pseudo Noise sequence
+    for j in range(size):
+        PN.append(A[-1])
+        B = A.copy() # New list to store values of A
+        for k in range(LFSR-1):
+            B[0] =  A[-1]^ A[-2] 
+            B[k+1] = A[k] 
+        A = B.copy()  
+    return PN     
+    """
 #########################################################################   
 ######## Injected Signal for STDR/SSTDR ################      
        
